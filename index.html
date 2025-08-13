@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warsaw Ghetto Interactive Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { height: 100vh; width: 100%; }
+    .popup-img { max-width: 200px; display: block; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([52.236, 20.982], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var markers = [
+      {
+        title: "Jewish Hospital on Czyste",
+        description: "Halina Rotstein, a doctor, worked here and chose to accompany her patients from the Warsaw Ghetto to Treblinka, walking with them down the corridor to the gas chambers.",
+        coordinates: [52.2461, 20.9773],
+        photo: "https://www.archiwum.warszawa1939.pl/19G108242"
+      },
+      {
+        title: "Umschlagplatz",
+        description: "Site where approximately 300,000 people were deported from the Warsaw Ghetto to Treblinka in 1942.",
+        coordinates: [52.2465, 20.9830],
+        photo: "https://www.archiwum.warszawa1939.pl/ARS1683-37"
+      },
+      {
+        title: "Passage from Small Ghetto to Big Ghetto",
+        description: "This passage at Chłodna Street connected the smaller and larger sections of the Warsaw Ghetto after 1940.",
+        coordinates: [52.2345, 20.9812],
+        photo: "https://www.archiwum.warszawa1939.pl/NAGICOCHA"
+      },
+      {
+        title: "Bridge on Chłodna Street",
+        description: "The bridge connecting parts of the ghetto, documented after January 1942.",
+        coordinates: [52.2347, 20.9820],
+        photo: "https://www.archiwum.warszawa1939.pl/19G108242"
+      },
+      {
+        title: "Fence with Barbed Wire on Żelazna Street",
+        description: "One of the barriers marking the ghetto perimeter.",
+        coordinates: [52.2360, 20.9815],
+        photo: "https://www.archiwum.warszawa1939.pl/ARS1683-37"
+      },
+      {
+        title: "Gate to the Ghetto (Żelazna & Grzybowska)",
+        description: "Main ghetto gate at the intersection of Żelazna and Grzybowska streets.",
+        coordinates: [52.2355, 20.9805],
+        photo: "https://www.archiwum.warszawa1939.pl/NAGICOCHA"
+      },
+      {
+        title: "Ruins on Twarda Street",
+        description: "Remains of buildings after 1940.",
+        coordinates: [52.2380, 20.9818],
+        photo: "https://www.archiwum.warszawa1939.pl/19G108242"
+      },
+      {
+        title: "Karmelicka Street",
+        description: "A street inside the ghetto.",
+        coordinates: [52.2390, 20.9825],
+        photo: "https://www.archiwum.warszawa1939.pl/ARS1683-37"
+      },
+      {
+        title: "Ghetto Gate on Grzybowski Square",
+        description: "Entrance to the ghetto at Grzybowski Square.",
+        coordinates: [52.2395, 20.9835],
+        photo: "https://www.archiwum.warszawa1939.pl/NAGICOCHA"
+      },
+      {
+        title: "Cycle Rickshaws Waiting on Żelazna Street",
+        description: "Rickshaws lined up near the ghetto gate.",
+        coordinates: [52.2365, 20.9812],
+        photo: "https://www.archiwum.warszawa1939.pl/19G108242"
+      },
+      {
+        title: "Ghetto Wall on Bonifraterska Street",
+        description: "A surviving section of the ghetto wall.",
+        coordinates: [52.2372, 20.9828],
+        photo: "https://www.archiwum.warszawa1939.pl/ARS1683-37"
+      },
+      {
+        title: "Wall on Przejazd Street",
+        description: "Ghetto wall visible after 1940.",
+        coordinates: [52.2385, 20.9830],
+        photo: "https://www.archiwum.warszawa1939.pl/NAGICOCHA"
+      },
+      {
+        title: "Ghetto Wall on Elektoraina Street",
+        description: "Part of the ghetto fortifications after 1940.",
+        coordinates: [52.2390, 20.9840],
+        photo: "https://www.archiwum.warszawa1939.pl/19G108242"
+      },
+      {
+        title: "Cemetery Gate at Okopowa Street",
+        description: "Gate described by Jan Jagielski.",
+        coordinates: [52.2420, 20.9775],
+        photo: "https://www.archiwum.warszawa1939.pl/ARS1683-37"
+      },
+      {
+        title: "Barbed Wire on Waliców & Krochmaina Streets",
+        description: "Barbed wire used to reinforce ghetto boundaries.",
+        coordinates: [52.2368, 20.9835],
+        photo: "https://www.archiwum.warszawa1939.pl/NAGICOCHA"
+      },
+      {
+        title: "Jewish Child by the Ghetto",
+        description: "Image capturing the human side of the ghetto’s suffering.",
+        coordinates: [52.2375, 20.9810],
+        photo: "https://www.archiwum.warszawa1939.pl/19G108242"
+      }
+    ];
+
+    markers.forEach(function(marker) {
+      var popupContent = "<strong>" + marker.title + "</strong><br>" + marker.description;
+      if(marker.photo) {
+        popupContent += "<br><img src='" + marker.photo + "' class='popup-img'>";
+      }
+      L.marker(marker.coordinates).addTo(map).bindPopup(popupContent);
+    });
+  </script>
+</body>
+</html>
